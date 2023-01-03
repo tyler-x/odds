@@ -205,11 +205,9 @@ var odds = new Vue({
                         od2=Math.round(this.odd2d*100);
                         gcd=this.getGcd(od1,od2);
                         results.col1='Amount 1:';
-                        results.col2=od1/gcd;
+                        results.col2=od2/gcd;
                         results.col3='Amount 2:';
-                        results.col4=od2/gcd;
-                        console.log(od1+'=odd1='+this.odd1d);
-                        console.log(od2+'=odd2='+this.odd2d);
+                        results.col4=od1/gcd;
                     }
                 }
             }

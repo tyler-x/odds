@@ -123,6 +123,20 @@ var vumap = new Vue({
                     this.odd2a=(-100)/(this.odd2-1);
                 }
             };
+        },
+        getLcm: function(x,y) {
+            if ((typeof x !== 'number') || (typeof y !== 'number')) return false;
+            return (!x || !y)?0:Math.abs((x*y)/getGcd(x,y));
+        },
+        getGcm: function(x,y) {
+            x=Math.abs(x);
+            y=Math.abs(y);
+            while(y) {
+                var t=y;
+                y=x%y;
+                x=t;
+            }
+            return x;
         }
     },
     watch: {
@@ -191,10 +205,10 @@ var vumap = new Vue({
                         results.col3='Profit:';
                         results.col4=profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
                     } else {
-                        results.col1='find';
-                        results.col2='best';
-                        results.col3='hedge';
-                        results.col4='amounts';
+                        results.col1='LCM';
+                        results.col2=this.getLcm(this.odd1d,this.odd2d);
+                        results.col3='GCM';
+                        results.col4=this.getGcm(this.odd1d,this.odd2d);
                     }
                 }
             }

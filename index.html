@@ -105,7 +105,7 @@ var odds = new Vue({
                     this.odd1d=this.odd1;
                     this.odd1a=(-100)/(this.odd1-1);
                 }
-            };
+            }
             if (!!this.odd2) {
                 if (this.odd2>99&&this.positive===false) this.odd2=this.odd2*-1;
                 if (this.odd2<0&&this.positive) this.odd2=this.odd2*-1;
@@ -122,7 +122,7 @@ var odds = new Vue({
                     this.odd2d=this.odd2;
                     this.odd2a=(-100)/(this.odd2-1);
                 }
-            };
+            }
         },
         getLcm: function(x,y) {
             if ((typeof x !== 'number') || (typeof y !== 'number')) return false;

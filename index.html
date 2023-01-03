@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ODDs</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.15.16/css/uikit.min.css" integrity="sha512-a40iopmIxIQElAYGkr9ubUtsNjZx1iA6zll1T/abSMB9U7KM3NsqLn4WCvPf9hSTqpa8o02ijsciXoiCeaJ8bw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.15.16/js/uikit.min.js" integrity="sha512-9FdFSsDYg6coqyzWqsAqXTechYqbrOcW0TgFCJ1oKYNR0xTc7xHqnVDaI+OPvHevWUeD5WUNqZEp6g4Jlyrdww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.15.16/js/uikit-icons.min.js" integrity="sha512-dRyoCUHNhknrVTpTWrclPufQ4QEFs80xaZAJ3PRO0vYyASWFpcxbHqyIjAVMG8So2pIwD2io6iUAyV5HyLNo3A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="vueOdds" class="uk-container uk-container-small uk-section uk-section-small">
+            <div class="uk-child-width-1-2 uk-child-width-1-4@s uk-grid-small" uk-grid>
+                <div>
+                    Odd 1
+                    <div v-if="results.odd1a" class="uk-float-right">{{results.odd1a}}</div>
+                    <input v-model="odd1" @change="refresh" type="number" name="odd1" placeholder="positive odd" class="uk-input">
+                </div>
+                <div>
+                    Odd 2
+                    <div v-if="results.odd2a"class="uk-float-right">{{results.odd2a}}</div>
+                    <input v-model="odd2" @change="refresh" type="number" name="odd2" placeholder="auto negative" class="uk-input">
+                </div>
+                <div>
+                    Amount 1
+                    <input v-model="input1" @change="refresh" type="number" name="input1" placeholder="" class="uk-input">
+                </div>
+                <div>
+                    Amount 2
+                    <input v-model="input2" @change="refresh" type="number" name="input2" placeholder="" class="uk-input">
+                </div>
+            </div>
+            <div class="uk-child-width-expand" uk-grid>
+                <div>
+                    <label>
+                        <input type="checkbox" v-model="freebet" class="uk-checkbox">
+                        Free bet?
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" v-model="positive" class="uk-checkbox">
+                        + Odd 2?
+                    </label>
+                </div>
+                <div>
+                    <button @click="reset" class="uk-button uk-button-small">Reset</button>
+                </div>
+            </div>
+            <hr>
+            <div class="uk-child-width-1-4 uk-grid-small" uk-grid>
+                <div>
+                    {{results.col1}}
+                </div>
+                <div>
+                    {{results.col2}}
+                </div>
+                <div>
+                    {{results.col3}}
+                </div>
+                <div>
+                    {{results.col4}}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+var vumap = new Vue({
+    el: '#vueOdds',
+    data: {
+        input1:    null,
+        input2:    null,
+        odd1:   null,
+        odd1a:  null,
+        odd1d:  null,
+        odd2:   null,
+        odd2a:  null,
+        odd2d:  null,
+        freebet:    false,
+        positive:   false
+    },
+    methods: {
+        reset: function() {
+            this.input1=null;
+            this.input2=null;
+            this.odd1=null;
+            this.odd2=null;
+            this.freebet=false;
+            this.positive=false;
+        },
+        refresh: function() {
+            if (!!this.odd1) {
+                if (this.odd1<0) {
+                    this.odd1a=this.odd1;
+                    this.odd1d=1-100/this.odd1;
+                } else if (this.odd1>99) {
+                    this.odd1a=this.odd1;
+                    this.odd1d=this.odd1/100+1;
+                } else if (this.odd1>=2) {
+                    this.odd1d=this.odd1;
+                    this.odd1a=(this.odd1-1)*100;
+                } else {
+                    this.odd1d=this.odd1;
+                    this.odd1a=(-100)/(this.odd1-1);
+                }
+            };
+            if (!!this.odd2) {
+                if (this.odd2>99&&this.positive===false) this.odd2=this.odd2*-1;
+                if (this.odd2<0&&this.positive) this.odd2=this.odd2*-1;
+                if (this.odd2<0) {
+                    this.odd2a=this.odd2;
+                    this.odd2d=1-100/this.odd2;
+                } else if (this.odd2>99) {
+                    this.odd2a=this.odd2;
+                    this.odd2d=this.odd2/100+1;
+                } else if (this.odd2>=2) {
+                    this.odd2d=this.odd2;
+                    this.odd2a=(this.odd2-1)*100;
+                } else {
+                    this.odd2d=this.odd2;
+                    this.odd2a=(-100)/(this.odd2-1);
+                }
+            };
+        }
+    },
+    watch: {
+        odd1: function(){this.refresh()},
+        odd2: function(){this.refresh()},
+        input1: function(){this.refresh()},
+        input2: function(){this.refresh()},
+        freebet: function(){this.refresh()},
+        positive: function(){this.refresh()}
+    },
+    computed: {
+        results: function() {
+            results=[];
+
+            if (this.odd1==this.odd1d) results.odd1a=Math.floor(this.odd1a);
+            else results.odd1a=null;
+            if (this.odd2==this.odd2d) results.odd2a=Math.floor(this.odd2a);
+            else results.odd1a=null;
+
+            if (!!this.input1) {
+                if (!!this.odd1) {
+                    output=this.input1*this.odd1d;
+                    if (this.freebet) output=output-this.input1;
+                    results.col1='Return:';
+                    results.col2=output.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                    if (this.freebet) {
+                        results.col3='free';
+                        results.col4='bet';
+                    } else {
+                        results.col3='Bet2win:';
+                        results.col4=(this.input1/this.odd1d).toLocaleString('en-US',{style:'currency',currency:'USD'});
+                    }
+                    if (!!this.odd2) {
+                        if (this.freebet) {
+                            amount2=output/this.odd2d;
+                            profit=output-amount2;
+                            cashrate=profit/this.input1;
+                            results.col1='Amount 2:';
+                            results.col2=amount2.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                            results.col3=profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                            results.col4=cashrate.toLocaleString('en-US',{style:'percent',minimumFractionDigits:0});
+                        } else {
+                            amount2=output/this.odd2d;
+                            profit=output-this.input1-amount2;
+                            results.col1='Profit:';
+                            results.col2=profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                            results.col3='Amount 2:';
+                            results.col4=amount2.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                        }
+                    }
+                }
+                if (!!this.input2) {
+                    results.col1='only';
+                    results.col2='one';
+                    results.col3='amount';
+                    results.col4='allowed';
+                }
+            } else {
+                if (!!this.odd1&&!!this.odd2) {
+                    if (!!this.input2) {
+                        output=this.input2*this.odd2d;
+                        amount1=output/this.odd1d;
+                        profit=output-this.input2-amount1;
+                        results.col1='Amount 1:';
+                        results.col2=amount1.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                        results.col3='Profit:';
+                        results.col4=profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                    } else {
+                        results.col1='find';
+                        results.col2='best';
+                        results.col3='hedge';
+                        results.col4='amounts';
+                    }
+                }
+            }
+
+            return results;
+        }
+    }
+});
+
+</script>

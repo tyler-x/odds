@@ -133,10 +133,6 @@ var odds = new Vue({
                 x=t;
             }
             return x;
-        },
-        getLcm: function(x,y) {
-            if ((typeof x !== 'number') || (typeof y !== 'number')) return false;
-            return (!x || !y)?0:Math.abs((x*y)/this.getGcd(x,y));
         }
     },
     watch: {
@@ -205,10 +201,13 @@ var odds = new Vue({
                         results.col3='Profit:';
                         results.col4=profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
                     } else {
-                        results.col1='LCM';
-                        results.col2=this.getLcm(this.odd1d,this.odd2d);
-                        results.col3='GCD';
-                        results.col4=this.getGcd(this.odd1d,this.odd2d);
+                        od1=this.odd1d.toFixed(2)*100;
+                        od2=this.odd2d.toFixed(2)*100;
+                        gcd=this.getGcd(od1,od2);
+                        results.col1='Amount 1:';
+                        results.col2=od1/gcd;
+                        results.col3='Amount 2:';
+                        results.col4=od2/gcd;
                         console.log('odd1='+this.odd1d);
                         console.log('odd2='+this.odd2d);
                     }

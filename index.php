@@ -21,7 +21,7 @@
                 </div>
                 <div class="uk-navbar-right">
                     <ul class="uk-navbar-nav">
-                        <li><a href="#">Zoom2it</a></li>
+                        <li><a href="#">LOGO</a></li>
                         <li>
                             <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#"></a>
                             <div class="uk-navbar-dropdown">
@@ -44,16 +44,7 @@
             <div class="uk-container">
                 <div class="uk-child-width-1-2@m" uk-grid>
                     <div>
-                        <h2>zoom2it</h2>
-                        <p>
-                            Zoom2it is a product of First Base Solutions Inc, a wholly owned subsidiary of JD Barnes Ltd - Canada's largest land surveying and mapping company.
-                        </p>
-                        <p>
-                            This Zoom2it application is a third party service of First Base Solutions Inc. presented through a partnership with Teranet Corp., independent of the Toronto Real Estate Board.
-                        </p>
-                        <kbd>
-                            api/iframe/secretkey/001101139
-                        </kbd>
+                        <h2>DEMO</h2>
                     </div>
                     <div>
                         <div class="zoom2it-container">
@@ -65,7 +56,7 @@
         </div>
         <div class="uk-section uk-section-xsmall uk-section-secondary">
             <div class="uk-container uk-text-center uk-text-small">
-                &copy; <?=date('Y')?> First Base Solutions
+                &copy; DEMO
             </div>
         </div>
     </body>

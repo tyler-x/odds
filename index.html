@@ -201,8 +201,8 @@ var odds = new Vue({
                         results.col3='Profit:';
                         results.col4=profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
                     } else {
-                        od1=Math.round(this.odd1d*100);
-                        od2=Math.round(this.odd2d*100);
+                        od1=Math.round(this.odd1d*1000);
+                        od2=Math.round(this.odd2d*1000);
                         gcd=this.getGcd(od1,od2);
                         results.col1='Amount 1:';
                         results.col2=od2/gcd;

@@ -30,8 +30,6 @@
                     Amount 2
                     <input v-model="input2" @change="refresh" type="number" name="input2" placeholder="" class="uk-input">
                 </div>
-            </div>
-            <div class="uk-child-width-expand" uk-grid>
                 <div>
                     <label>
                         <input type="checkbox" v-model="freebet" class="uk-checkbox">
@@ -46,6 +44,38 @@
                 </div>
                 <div>
                     <button @click="reset" class="uk-button uk-button-small">Reset</button>
+                </div>
+                <div>
+                    <button uk-toggle="target:#help">Instruction</button>
+                    <div id="help" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body">
+                            <h3 class="uk-modal-title">Insu</h3>
+                            <li>Odd2 is auto negative, if not, check [+Odd2?].</li>
+                            <li>[Free Bet?] supports mode 2,3</li>
+                            <ol>
+                                <li>
+                                    Enter Odd1, Odd2:<br>
+                                    Calculate best arbitrage amount1 and amount2 to break even.
+                                </li>
+                                <li>
+                                    Enter Odd1, Odd2, Amount1:<br>
+                                    [Profit] is the arbitrage profit if bet amount2 at odd2.<br>
+                                    [Amount2] is the arbitrage amount required at odd2 if bet amount1 at odd1.
+                                </li>
+                                <li>
+                                    Enter Odd1, Amount1:<br>
+                                    [Return] total if place amount1 at odd1.<br>
+                                    [Bet2Get] is the amount need to place to get total amount1 back.
+                                </li>
+                                <li>
+                                    Enter Odd1, Amount1, Amount2:<br>
+                                    [Bet2Win] is the amount need to place to win back amount1.<br>
+                                    [Profit] is the amount2(limit) - amount1.
+                                </li>
+                            </ol>
+                            <button class="uk-modal-close" type="button">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <hr>
@@ -162,7 +192,7 @@ var odds = new Vue({
                         results.col3='free';
                         results.col4='bet';
                     } else {
-                        results.col3='Bet2get:';
+                        results.col3='Bet2Get:';
                         results.col4=(this.input1/this.odd1d).toLocaleString('en-US',{style:'currency',currency:'USD'});
                     }
                     if (!!this.odd2) {

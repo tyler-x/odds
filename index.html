@@ -15,20 +15,20 @@
                 <div>
                     Odd 1
                     <div v-if="results.odd1a" class="uk-float-right">{{results.odd1a}}</div>
-                    <input v-model="odd1" @change="refresh" type="number" name="odd1" placeholder="positive odd" class="uk-input">
+                    <input v-model="odd1" @change="refresh" type="number" pattern="[0-9]*" name="odd1" placeholder="positive odd" class="uk-input">
                 </div>
                 <div>
                     Odd 2
                     <div v-if="results.odd2a"class="uk-float-right">{{results.odd2a}}</div>
-                    <input v-model="odd2" @change="refresh" type="number" name="odd2" placeholder="auto negative" class="uk-input">
+                    <input v-model="odd2" @change="refresh" type="number" pattern="[0-9]*" name="odd2" placeholder="auto negative" class="uk-input">
                 </div>
                 <div>
                     Amount 1
-                    <input v-model="input1" @change="refresh" type="number" name="input1" placeholder="" class="uk-input">
+                    <input v-model="input1" @change="refresh" type="number" pattern="[0-9]*" name="input1" placeholder="" class="uk-input">
                 </div>
                 <div>
                     Amount 2
-                    <input v-model="input2" @change="refresh" type="number" name="input2" placeholder="" class="uk-input">
+                    <input v-model="input2" @change="refresh" type="number" pattern="[0-9]*" name="input2" placeholder="" class="uk-input">
                 </div>
                 <div>
                     <label>

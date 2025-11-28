@@ -217,7 +217,7 @@ var odds = new Vue({
                         results.col1='Bet2: '+amount2.toLocaleString('en-US',{style:'currency',currency:'USD'});
                         results.col2='Bet3: '+amount3.toLocaleString('en-US',{style:'currency',currency:'USD'});
                         results.col3='Payout: '+output.toLocaleString('en-US',{style:'currency',currency:'USD'});
-                        results.col4='Profit: 356'+profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
+                        results.col4='Profit: '+profit.toLocaleString('en-US',{style:'currency',currency:'USD'});
                     } else {
                         // odd1/input1/input2, given odd1 to profit input1, input2 is the limit, get profit and bet2win amount
                         if (!!this.odd1) {
